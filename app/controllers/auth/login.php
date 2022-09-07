@@ -51,6 +51,14 @@ class LoginController
         $usuario = new UsuarioModel();
         $sqlUsuario = $usuario->getUser($email);
 
+        if(isset($sqlUsuario['error'])){
+            $arrayReturn = array(
+                'error' => $sqlUsuario['message'],
+                'status' => 404
+            );
+            return json_encode($arrayReturn); 
+        }
+
         if (!isset($sqlUsuario)) {
             $arrayReturn = array(
                 'error' => 'El correo no existe en la bd',

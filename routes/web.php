@@ -40,8 +40,9 @@ $router->group(['before' => 'auth'], function ($router) {
     });
 
     ////RUTAS PARA EL USUARIO ADMINISTRATIVO
-    $router->group(['before' => 'rolAdministrativo'], function ($router) {
-        $router->post('/crear/{nombre}/{apellido}/{email}/{password}/{rol}', function ($nombre, $apellido, $email, $password, $rol) {
+    $router->group(['prefix' => 'admin', 'before' => 'rolAdministrativo'], function ($router) {
+        
+        $router->post('/create/{nombre}/{apellido}/{email}/{password}/{rol}', function ($nombre, $apellido, $email, $password, $rol) {
             $usuarioController = new UsuarioController();
             return $usuarioController->createUser($nombre, $apellido, $email, $password, $rol);
         });
@@ -56,4 +57,8 @@ $router->group(['before' => 'auth'], function ($router) {
             return $usuarioController->deleteUser($id);
         });
     });
+
+
+
+    ///RUTAS PARA EL USUARIO X
 });

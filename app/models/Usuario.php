@@ -4,7 +4,6 @@ class UsuarioModel
 {
 
     private $db;
-    private $libros;
 
     public function __construct()
     {
@@ -15,11 +14,20 @@ class UsuarioModel
 
     public function getUser($email)
     {
+        try{
         $sql = "SELECT * FROM Usuario WHERE email='$email'";
 
         $resultado = $this->db->query($sql);
         $row = $resultado->fetch_assoc();
         return $row;
+        }
+        catch(Exception $e){
+            $arrayResultado = array (
+                'error' => 404,
+                'message' => $e
+            );
+            return $arrayResultado;
+        }
     }
 
     public function createUser($nombre, $apellido, $email, $password, $rol){
