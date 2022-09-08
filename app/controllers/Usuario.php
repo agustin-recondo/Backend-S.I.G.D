@@ -1,5 +1,5 @@
 <?php
-include("../models/Usuario.php");
+include($_SERVER["DOCUMENT_ROOT"] . '/app/models/Usuario.php');
 class UsuarioController{
 
     function __construct()

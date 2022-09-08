@@ -1,14 +1,13 @@
 <?php
-
-include_once './app/controllers/Usuario.php';
-include_once './app/controllers/auth/login.php';
 session_start();
+include_once ($_SERVER["DOCUMENT_ROOT"] . '/app/controllers/Usuario.php');
+include_once ($_SERVER["DOCUMENT_ROOT"] . '/app/controllers/auth/login.php');
+
 ////FILTROS
 ////filtro de autentificacion de logueo
 $router->filter('auth', function () {
 
     if (!isset($_SESSION['user'])) {
-        echo "Hay que estar logueado";
         return false;
     }
 
@@ -16,7 +15,6 @@ $router->filter('auth', function () {
 });
 ////Filtro para rol administrativo
 $router->filter('rolAdministrativo', function () {
-    session_start();
     if ($_SESSION['rol'] != 'Administrativo') {
         echo 'El rol ' . $_SESSION['rol'] . ' no puede acceder';
         return false;
@@ -47,7 +45,7 @@ $router->group(['before' => 'auth'], function ($router) {
             return $usuarioController->createUser($nombre, $apellido, $email, $password, $rol);
         });
 
-        $router->get('/update/{id}/{nombre}/{apellido}/{email}/{password}/{rol}', function ($id, $nombre, $apellido, $email, $password, $rol) {
+        $router->update('/update/{id}/{nombre}/{apellido}/{email}/{password}/{rol}', function ($id, $nombre, $apellido, $email, $password, $rol) {
             $usuarioController = new UsuarioController();
             return $usuarioController->updateUser($id, $nombre, $apellido, $email, $password, $rol);
         });

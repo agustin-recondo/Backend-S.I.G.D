@@ -1,13 +1,11 @@
 <?php
-include('../../conexion.php');
 class UsuarioModel
 {
-
     private $db;
 
     public function __construct()
     {
-
+        
         $this->db = Conexion::conectar();
         $this->usuarios = array();
     }
