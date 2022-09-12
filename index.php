@@ -1,7 +1,8 @@
 <?php
+$ruta = getcwd();
+require_once($ruta . '/vendor/autoload.php');
+require_once ($ruta . '/conexion.php');
 
-require_once ($_SERVER["DOCUMENT_ROOT"] . '/vendor/autoload.php');
-require_once ($_SERVER["DOCUMENT_ROOT"] . '/conexion.php');
 
 use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\RouteParser;
@@ -11,7 +12,7 @@ use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
 
 $router = new RouteCollector(new RouteParser);
 
-require_once ($_SERVER["DOCUMENT_ROOT"] . '/routes/web.php');
+require_once ($ruta . '/routes/web.php');
 
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 
@@ -28,13 +29,7 @@ catch(HttpMethodNotAllowedException $e){
     die();
 }
 
-if($response){
-    echo $response;
-}
-else {
-    echo 'Hay que estar logueado o no se tiene permisos para acceder';
-}
-
+echo($response);
 
 ?>
 
