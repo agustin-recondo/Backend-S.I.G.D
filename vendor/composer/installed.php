@@ -1,21 +1,30 @@
 <?php return array(
     'root' => array(
-        'name' => 'agustin/biblioteca',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => '25aa39a3d467370bd3cb0bd6d58629f1e7be44c9',
+        'name' => 'agustin/backend-proyecto',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '346d7560b18d0b5420276224216f8f3283fdd45b',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        'agustin/biblioteca' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '25aa39a3d467370bd3cb0bd6d58629f1e7be44c9',
+        'agustin/backend-proyecto' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '346d7560b18d0b5420276224216f8f3283fdd45b',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'firebase/php-jwt' => array(
+            'pretty_version' => 'v6.3.0',
+            'version' => '6.3.0.0',
+            'reference' => '018dfc4e1da92ad8a1b90adc4893f476a3b41cb8',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../firebase/php-jwt',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

@@ -3,7 +3,8 @@
     "description": "S.I.G.D Backend",
     "type": "project",
     "require": {
-        "phroute/phroute": "^2.2"
+        "phroute/phroute": "^2.2",
+        "firebase/php-jwt": "^6.3"
     },
     "autoload": {
         "psr-4": {
