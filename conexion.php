@@ -6,14 +6,19 @@ class Conexion
 
     public static function conectar()
     {
-        try{
         $conexion = new mysqli("localhost", "root", "", "BDproyecto");
-        return $conexion;
-        }
-        catch(Exception $e){
-            echo $e;
+        
+        
+        if ($conexion->connect_error) {
+            $respuesta = array(
+                "success" => 0,
+                "mensaje" => 'Error en la conexion con la base de datos',
+            );
+            echo json_encode($respuesta);
             die();
         }
+        return $conexion;
+        
     }
 
     function query($query)

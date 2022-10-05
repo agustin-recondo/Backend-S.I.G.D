@@ -11,10 +11,11 @@ class LoginController
     {
     }
 
+    /******************************************
+     * LOGIN
+     ******************************************/
     function login()
     {
-
-
         $email = $_POST['email'];
         $password = $_POST['password'];
 
@@ -22,11 +23,19 @@ class LoginController
          * Comprobar validez del correo y contraseña
          ******************************/
         if (!validateEmail($email)) {
-            return 'email invalido';
+            $respuesta = array(
+                "success" => 0,
+                "mensaje" => 'Correo electronico invalido',
+            );
+            return($respuesta);
         }
 
         if (!validatePassword($password)) {
-            return 'La contraseña debe incluir al menos 8 caracteres, una mayuscula, un numero y un caracter especial';
+            $respuesta = array(
+                "success" => 0,
+                "mensaje" => 'La contraseña debe contener al menos 8 caracteres, una mayuscula, un numero y un caracter especial',
+            );
+            return($respuesta);
         }
 
         /******************************
@@ -35,18 +44,26 @@ class LoginController
         $modelo = new UsuarioModel();
         $usuario = $modelo->getUser($email);
         if (!$usuario) {
-            return 'El correo no coincide con un usuario registrado';
+            $respuesta = array(
+                "success" => 0,
+                "mensaje" => 'El correo no es correcto',
+            );
+            return($respuesta);
         }
 
         /******************************
          * Validar que la contraseña coincida
          ******************************/
         if ($usuario['Password'] != $password) {
-            return 'La contraseña no es correcta';
+            $respuesta = array(
+                "success" => 0,
+                "mensaje" => 'La contraseña no es correcta',
+            );
+            return($respuesta);
         }
 
         /******************************
-         * Generar Token
+         * Generar Token y guardarlo en BD
          ******************************/
 
         $tokenController = new TokenController();
@@ -56,14 +73,10 @@ class LoginController
 
         $respuesta = array(
             "success" => 1,
-            "mensaje" => 'Logueo correcto',
+            "mensaje" => 'Inicio de sesión exitoso',
             "token" => $jwt['token'],
-            "nombre" => $usuario['NomUsuario'],
-            "apellido" => $usuario['ApUsuario'],
-            "email" => $usuario['Email'],
-            "rol" => $usuario['Rol'],
         );
 
-        return json_encode($respuesta);
+        return($respuesta);
     }
 }

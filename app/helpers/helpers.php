@@ -27,3 +27,19 @@ function validatePassword($password)
 
     return true;
 }
+
+/******************************
+ * Comprobar validez del rol
+ ******************************/
+function validateRol($rol)
+{
+    $roles = [
+        'DT',
+        'Scouting',
+        'Estadistico',
+        'Arbitro',
+        'Administrativo',
+    ];
+
+    return (in_array($rol, $roles));
+}

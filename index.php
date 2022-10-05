@@ -9,6 +9,7 @@ use Phroute\Phroute\RouteParser;
 //Excepciones
 use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
+use Phroute\Phroute\Exception\InvalidTokenException;
 
 $router = new RouteCollector(new RouteParser);
 
@@ -26,6 +27,10 @@ catch(HttpRouteNotFoundException $e){
 }
 catch(HttpMethodNotAllowedException $e){
     echo $e->getMessage();
+    die();
+}
+catch(InvalidTokenException $e){
+    echo 'prueba filter token';
     die();
 }
 
