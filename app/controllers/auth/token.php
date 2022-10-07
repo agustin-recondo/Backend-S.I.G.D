@@ -20,7 +20,8 @@ class TokenController
     {
         $time = time();
         $time_exp = $time + (480 * 60);
-        $key = "preguntarcomosegeneraestakeyalprofesor";
+        $key = $_ENV['secret_key'];
+        
         $token = array(
             "iat" => $time, //Tiempo en el que inicia el token
             "exp" => $time_exp, //Tiempo en el que expira el token - 8 horas
@@ -46,9 +47,8 @@ class TokenController
      **********************/
     function validateToken()
     {
-        
         $headers = getallheaders();
-        $key = "preguntarcomosegeneraestakeyalprofesor";
+        $key = $_ENV['secret_key'];
 
         //Validar que viene el token en el header y que no es nulo
         if (!isset($headers['Authorization']) || $headers['Authorization'] == null) {
@@ -89,30 +89,6 @@ class TokenController
             $respuesta = array(
                 "success" => 0,
                 "mensaje" => "Error en el token",
-            );
-            return $respuesta;
-        }
-
-        $usuarioController = new UsuarioModel();
-
-        $dataUsuario = $usuarioController->getUser($data->data->email);
-
-        //Comparar el token del header con el token guardado en BD
-        if ($headers['Authorization'] != $dataUsuario['token'] ) {
-            header('HTTP/1.0 403 Forbidden', true, 403);
-            $respuesta = array(
-                "success" => 0,
-                "mensaje" => 'El token no es valido',
-            );
-            return $respuesta;
-        }
-
-
-        if ($dataUsuario['token_exp'] < time() && $data->exp < time()) {
-            header('HTTP/1.0 403 Forbidden', true, 403);
-            $respuesta = array(
-                "success" => 0,
-                "mensaje" => 'El token expiro',
             );
             return $respuesta;
         }

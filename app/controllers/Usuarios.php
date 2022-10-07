@@ -3,6 +3,9 @@ $ruta = getcwd();
 
 require_once($ruta . '\app\models\Usuario.php');
 require_once($ruta . '/app/helpers/helpers.php');
+
+
+
 class UsuarioController
 {
 
@@ -201,15 +204,13 @@ class UsuarioController
             $respuesta = array(
                 'success' => 0,
                 'mensaje' => "Hubo un error al eliminar al usuario",
-                'data' => $sqlUsuario,
             );
             return ($respuesta);
         }
-        
+
         $respuesta = array(
             'success' => 1,
             'mensaje' => "Usuario eliminado correctamente",
-            'data' => $sqlUsuario,
         );
         return ($respuesta);
     }

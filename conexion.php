@@ -6,7 +6,7 @@ class Conexion
 
     public static function conectar()
     {
-        $conexion = new mysqli("localhost", "root", "", "BDproyecto");
+        $conexion = new mysqli($_ENV['DDBB_HOST'], $_ENV['DDBB_USER'], $_ENV['DDBB_PASSWORD'], $_ENV['DDBB_NAME']);
         
         
         if ($conexion->connect_error) {
