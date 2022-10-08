@@ -22,7 +22,7 @@ $router->POST('/login', function () {
 
 //Solicitar cambio de contraseña
 $router->GET('/requestResetPassword/{email}', function ($email) {
-   $login = new LoginController($email);
+   $login = new LoginController();
    $respuesta = $login->requestResetPassword($email);
    return json_encode($respuesta);
 });
@@ -37,9 +37,21 @@ $router->GET('/validateToken', function () {
  * Rutas que requieren token pero no un rol
  *****************************************/
 $router->group(['before' => 'auth'], function ($router) {
+   
 $router->GET('/getUser/{email}', function($email){
    $usuario = new UsuarioController();
    $respuesta = $usuario->getUser($email);
+   return json_encode($respuesta);
+});
+});
+
+/*****************************************
+ * Ruta para cambiar contraseña
+ ****************************************/
+$router->group(['before' => 'authResetPassword'], function ($router) {
+$router->POST('/resetPassword', function () {
+   $login = new LoginController();
+   $respuesta = $login->resetPassword();
    return json_encode($respuesta);
 });
 });
@@ -61,7 +73,7 @@ $router->group(['prefix' => '/admin', 'before' => 'authAdmin'], function ($route
       return json_encode($respuesta);
    });
    //Borrar usuario
-   $router->DELETE('deleteUser/{id}', function ($id) {
+   $router->DELETE('deleteUser/{id:i}', function ($id) {
       $usuario = new UsuarioController();
       $respuesta = $usuario->deleteUser($id);
       return json_encode($respuesta);

@@ -13,6 +13,16 @@ $router->filter('auth', function(){
 
  });
 
+ $router->filter('authResetPassword', function(){
+    $validateToken = new TokenController;
+    $respuesta = $validateToken->validateTokenResetPassword();
+
+    if($respuesta['success'] == 0){
+        die(json_encode($respuesta));
+    }
+
+ });
+
 /*******
  * Auth de rol administrador
  *******/
@@ -24,7 +34,7 @@ $router->filter('authAdmin', function(){
         die(json_encode($respuesta));
     }
 
-    if($respuesta['rol'] != 'Administrativo'){
+    if(!isset($respuesta['rol']) || $respuesta['rol'] != 'Administrativo'){
         $respuesta = array(
             "success" => 0,
             "mensaje" => 'Rol no valido para esta accion',

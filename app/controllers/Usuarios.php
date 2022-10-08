@@ -89,7 +89,7 @@ class UsuarioController
             );
             return $respuesta;
         }
-        $password = $_POST['password'];
+        $password = hash('sha256',$_POST['password']);
 
         //Validar rol
         if (!isset($_POST['rol']) || !$_POST['rol'] || !validateRol($_POST['rol'])) {
