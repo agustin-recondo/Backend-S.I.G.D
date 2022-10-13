@@ -41,7 +41,7 @@ class LoginController
         $mail = new PHPMailer(true);
         try {
             //Server settings
-            $mail->SMTPDebug = true;
+            $mail->SMTPDebug = 0;
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
@@ -52,7 +52,7 @@ class LoginController
 
             //Recipients
             $mail->setFrom('sigd.soporte@gmail.com', 'S.I.G.D');
-            $mail->addAddress('giliwew127@civikli.com', $usuario['NomUsuario'].' '.$usuario['ApUsuario']);
+            $mail->addAddress('hesoyik876@charav.com', $usuario['NomUsuario'].' '.$usuario['ApUsuario']);
 
             //Content
             $mail->isHTML(true);

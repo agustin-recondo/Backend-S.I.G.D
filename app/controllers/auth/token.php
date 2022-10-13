@@ -163,7 +163,7 @@ class TokenController
             header('HTTP/1.0 403 Forbidden', true, 403);
             $respuesta = array(
                 "success" => 0,
-                "mensaje" => 'El token fue modificado o no es valido',
+                "mensaje" => 'El token ya fue utilizado o no es valido',
             );
             return $respuesta;
         }
