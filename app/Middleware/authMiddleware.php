@@ -34,7 +34,7 @@ $router->filter('authAdmin', function(){
         die(json_encode($respuesta));
     }
 
-    if(!isset($respuesta['rol']) || $respuesta['rol'] != 'Administrativo'){
+    if(!isset($respuesta['rol']) || $respuesta['rol'] != 'administrativo'){
         $respuesta = array(
             "success" => 0,
             "mensaje" => 'Rol no valido para esta accion',

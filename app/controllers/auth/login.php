@@ -120,7 +120,7 @@ class LoginController
         /******************************
          * Validar que la contraseña coincida
          ******************************/
-        if ($usuario['Password'] != $password) {
+        if ($usuario['password'] != $password) {
             $respuesta = array(
                 "success" => 0,
                 "mensaje" => 'La contraseña no es correcta',

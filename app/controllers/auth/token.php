@@ -26,11 +26,11 @@ class TokenController
             "iat" => $time, //Tiempo en el que inicia el token
             "exp" => $time_exp, //Tiempo en el que expira el token - 8 horas
             "data" =>  [
-                "id" => $datos['IdUsuario'],
-                "nombre" => $datos['NomUsuario'],
-                "apellido" => $datos['ApUsuario'],
-                "email" => $datos['Email'],
-                "rol" => $datos['Rol'],
+                "id" => $datos['idusuario'],
+                "nombre" => $datos['nomusuario'],
+                "apellido" => $datos['apusuario'],
+                "email" => $datos['email'],
+                "rol" => $datos['rol'],
             ]
         );
 
@@ -132,7 +132,7 @@ class TokenController
         $headers = getallheaders();
         $usuarioModel = new UsuarioModel;
         $usuario = $usuarioModel->getUser($_POST['email']);
-        $key = $usuario['Password'];
+        $key = $usuario['password'];
 
         //Validar que viene el token en el header y que no es nulo
         if (!isset($headers['Authorization']) || $headers['Authorization'] == null) {

@@ -5,6 +5,7 @@ use Phroute\Phroute\Exception\InvalidTokenException;
 $ruta = getcwd();
 
 require_once($ruta . '/app/controllers/Usuarios.php');
+require_once($ruta . '/app/controllers/Deportes.php');
 require_once($ruta . '/app/controllers/auth/login.php');
 require_once($ruta . '/app/controllers/auth/token.php');
 require_once($ruta . '/app/Middleware/authMiddleware.php');
@@ -43,6 +44,14 @@ $router->GET('/getUser/{email}', function($email){
    $respuesta = $usuario->getUser($email);
    return json_encode($respuesta);
 });
+
+$router->GET('/getDeporte/{nombre}', function($nombre){
+   $deporte= new DeportesController();
+   $respuesta = $deporte->getDeporte($nombre);
+   return json_encode($respuesta);
+});
+
+
 });
 
 /*****************************************
@@ -76,6 +85,20 @@ $router->group(['prefix' => '/admin', 'before' => 'authAdmin'], function ($route
    $router->DELETE('deleteUser/{id:i}', function ($id) {
       $usuario = new UsuarioController();
       $respuesta = $usuario->deleteUser($id);
+      return json_encode($respuesta);
+   });
+
+   //Crear deporte
+   $router->POST('createDeporte', function(){
+      $deporte = new DeportesController();
+      $respuesta = $deporte->createDeporte();
+      return json_encode($respuesta);
+   });
+
+   //Modificar deporte
+   $router->POST('updateDeporte/{id}', function($id){
+      $deporte = new DeportesController();
+      $respuesta = $deporte->updateDeporte($id);
       return json_encode($respuesta);
    });
 });
