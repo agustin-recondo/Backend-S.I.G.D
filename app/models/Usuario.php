@@ -40,4 +40,27 @@ class UsuarioModel
         $resultado = $this->db->query($sql);
         return $this->db->query($resultado);
     }
+
+    public function getArbitrosLibres(){
+        $sql = "SELECT usuario.idusuario, usuario.nomusuario, usuario.apusuario
+         FROM equipo 
+         RIGHT JOIN usuario ON usuario.idusuario = equipo.idusuario 
+         WHERE equipo.idusuario IS NULL && rol = 'entrenador';";
+
+         $resultado = $this->db->query($sql);
+
+         $array = [];
+
+        while ($fila = $resultado->fetch_assoc()) {
+            $arbitro = array(
+                'id' =>$fila['idusuario'],
+                'nombre' => $fila['nomusuario'],
+                'apellido' => $fila['apusuario']
+            );
+
+            array_push($array, $arbitro);
+        }
+
+         return $array;
+    }
 }

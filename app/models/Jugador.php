@@ -42,4 +42,17 @@ class JugadorModel
         return $resultado;
     }
 
+    public function jugadorEquipo($jugadores, $iddeporte, $idequipo){
+        $values = '';
+        foreach ($jugadores as $jugador) {
+            $value = "($jugador, $iddeporte, $idequipo),";
+            $values .= $value;
+        }
+
+        $valuesSinUltimaComa = substr($values, 0, -1);
+        $sql = "INSERT INTO realiza(cijugador, iddeporte, idequipo) VALUES $valuesSinUltimaComa";
+        $resultado = $this->db->query($sql);
+        return $resultado;
+    }
+
 }

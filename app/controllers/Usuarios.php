@@ -214,4 +214,16 @@ class UsuarioController
         );
         return ($respuesta);
     }
+
+    function getArbitrosLibres(){
+        $usuario = new UsuarioModel();
+        $sqlUsuario = $usuario->getArbitrosLibres();
+
+        $respuesta = array(
+            'success' => 1,
+            'mensaje' => "Usuario eliminado correctamente",
+            'entrenadores' => $sqlUsuario,
+        );
+        return ($respuesta);
+    }
 }

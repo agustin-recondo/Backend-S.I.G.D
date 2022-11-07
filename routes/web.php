@@ -4,9 +4,13 @@ use Phroute\Phroute\Exception\InvalidTokenException;
 
 $ruta = getcwd();
 
+var_dump($ruta);
+die();
+
 require_once($ruta . '/app/controllers/Usuarios.php');
 require_once($ruta . '/app/controllers/Deportes.php');
 require_once($ruta . '/app/controllers/Jugador.php');
+require_once($ruta . '/app/controllers/Equipos.php');
 require_once($ruta . '/app/controllers/auth/login.php');
 require_once($ruta . '/app/controllers/auth/token.php');
 require_once($ruta . '/app/Middleware/authMiddleware.php');
@@ -54,6 +58,13 @@ $router->GET('/getJugador/{ci}', function ($ci) {
 $router->GET('getPosicionesDeportes', function () {
    $deporte = new DeportesController();
    $respuesta = $deporte->getPosicionesJoinDeporte();
+   return json_encode($respuesta);
+});
+
+//Entrenadores libres
+$router->GET('getEntrenadoresLibres', function () {
+   $deporte = new UsuarioController();
+   $respuesta = $deporte->getArbitrosLibres();
    return json_encode($respuesta);
 });
 
@@ -134,6 +145,13 @@ $router->group(['prefix' => '/admin', 'before' => 'authAdmin'], function ($route
    $router->POST('updateJugador', function () {
       $jugador = new JugadorController();
       $respuesta = $jugador->updateJugador();
+      return json_encode($respuesta);
+   });
+
+   //Crear equipo
+   $router->POST('createEquipo', function() {
+      $equipo = new EquipoController();
+      $respuesta = $equipo->createEquipo();
       return json_encode($respuesta);
    });
 });
