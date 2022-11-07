@@ -34,6 +34,20 @@ class DeportesController
         return $data;
     }
 
+    function getDeportes()
+    {
+
+        $deporte = new DeportesModel();
+        $sqlDeporte = $deporte->getDeportes();
+
+        $data = array(
+            'success' => 1,
+            'deportes' => $sqlDeporte,
+        );
+
+        return $data;
+    }
+
     function createDeporte()
     {
         //Validar que vengan datos
@@ -170,6 +184,19 @@ class DeportesController
             'success' => 1,
             'mensaje' => 'Se modifico el deporte correctamente'
         );
+        return $respuesta;
+    }
+
+    function getPosicionesJoinDeporte(){
+        $posicion = new PosicionesModel();
+
+        $posicionesJoin = $posicion->getPosicionesJOIN();
+
+        $respuesta = array(
+            'success' => 1,
+            'posiciones' => $posicionesJoin,
+        );
+
         return $respuesta;
     }
 }

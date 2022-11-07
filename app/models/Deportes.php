@@ -20,6 +20,18 @@ class DeportesModel
         return $resultado->fetch_assoc();
     }
 
+    public function getDeportes(){
+        $sql = "select nomdeporte from deporte";
+        $resultado = $this->db->query($sql);
+
+        $array = [];
+
+        while ($fila = $resultado->fetch_assoc()) {
+            array_push($array, $fila);
+        }
+        return $array;
+    }
+
 
     public function createDeporte($id, $nombre, $convocables, $titulares){
         $sql = "insert into deporte(iddeporte, nomdeporte, convocables, titulares) VALUES ($id, '$nombre', '$convocables', '$titulares');";
@@ -32,16 +44,4 @@ class DeportesModel
         $resultado = $this->db->query($sql);
         return $resultado;
     }
-
-    // public function updateUser($id, $nombre, $apellido, $email, $rol){
-    //     $sql = "UPDATE `usuario` SET `NomUsuario` = '$nombre', `ApUsuario` = '$apellido', `Email` = '$email', `Rol` = '$rol' WHERE `usuario`.`IdUsuario` = $id;";
-    //     $resultado = $this->db->query($sql);
-    //     return $resultado;
-    // }
-
-    // public function deleteUser($id){
-    //     $sql = "UPDATE `usuario` SET Borrado = 1 WHERE `usuario`.`IdUsuario` = '$id'";
-    //     $resultado = $this->db->query($sql);
-    //     return $this->db->query($resultado);
-    // }
 }

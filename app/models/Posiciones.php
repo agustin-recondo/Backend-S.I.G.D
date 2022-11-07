@@ -32,6 +32,25 @@ class PosicionesModel
         return $array;
     }
 
+    public function getPosicionesJOIN(){
+        $sql = "SELECT idposicion, deporte.iddeporte, nomposicion, nomdeporte FROM posicion INNER JOIN deporte ON deporte.iddeporte=posicion.iddeporte;";
+        $resultado = $this->db->query($sql);
+        $array = [];
+
+        while ($fila = $resultado->fetch_assoc()) {
+            $posicion = array(
+                'idposicion' =>$fila['idposicion'],
+                'nombre' => $fila['nomposicion'],
+                'iddeporte' => $fila['iddeporte'],
+                'nomdeporte' => $fila['nomdeporte']
+            );
+
+            array_push($array, $posicion);
+        }
+
+        return $array;
+    }
+
     public function createPosicion($idDeporte,$idPosicion, $nombres){
         $values = '';
         foreach ($nombres as $nombre) {
