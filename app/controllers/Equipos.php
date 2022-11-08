@@ -11,6 +11,26 @@ require_once($ruta . '/app/helpers/helpers.php');
 
 class EquipoController
 {
+
+    function getEquipos($nombre){
+        $equipo = new EquiposModel();
+        $sqlEquipos = $equipo->getEquipos($nombre);
+
+        if(!$sqlEquipos){
+            $data = array(
+                'success' => 0,
+                'mensaje' => 'Error al buscar equipos'
+            );
+            return $data;
+        }
+        
+        $data = array(
+            'success' => 1,
+            'mensaje' => 'Equipos encontrados',
+            'equipos' => $sqlEquipos,
+        );
+        return $data;
+    }
     function createEquipo(){
 
         if (!isset($_POST['nombre']) || !$_POST['nombre']) {

@@ -4,13 +4,11 @@ use Phroute\Phroute\Exception\InvalidTokenException;
 
 $ruta = getcwd();
 
-var_dump($ruta);
-die();
-
 require_once($ruta . '/app/controllers/Usuarios.php');
 require_once($ruta . '/app/controllers/Deportes.php');
 require_once($ruta . '/app/controllers/Jugador.php');
 require_once($ruta . '/app/controllers/Equipos.php');
+require_once($ruta . '/app/controllers/Competencias.php');
 require_once($ruta . '/app/controllers/auth/login.php');
 require_once($ruta . '/app/controllers/auth/token.php');
 require_once($ruta . '/app/Middleware/authMiddleware.php');
@@ -68,6 +66,19 @@ $router->GET('getEntrenadoresLibres', function () {
    return json_encode($respuesta);
 });
 
+//cOMPETENCIAS
+$router->GET('getCompetencias/{deporte}', function ($deporte) {
+   $competencia = new CompetenciasController();
+   $respuesta = $competencia->getcompetencias($deporte);
+   return json_encode($respuesta);
+});
+
+//Equipos
+$router->GET('getEquipos/{texto}', function ($texto) {
+   $equipo = new EquipoController();
+   $respuesta = $equipo->getEquipos($texto);
+   return json_encode($respuesta);
+});
 /*****************************************
  * Rutas que requieren token pero no un rol
  *****************************************/

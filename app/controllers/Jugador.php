@@ -3,6 +3,7 @@ $ruta = getcwd();
 
 require_once($ruta . '\app\models\Deportes.php');
 require_once($ruta . '\app\models\Jugador.php');
+require_once($ruta . '\app\models\Incidencias.php');
 require_once($ruta . '\app\models\Posiciones.php');
 require_once($ruta . '/app/helpers/helpers.php');
 
@@ -14,6 +15,9 @@ class JugadorController
     function getJugador($ci){
         $jugador = new JugadorModel();
         $buscarJugador = $jugador->getJugador($ci);
+
+        $incidenciasJugador = new IncidenciasModel();
+        $dataIncidencias = $incidenciasJugador->getIncidenciasJugador($ci);
 
 
         if(!$buscarJugador){
@@ -28,6 +32,7 @@ class JugadorController
             'success' => 1,
             'mensaje' => "Se encontro el jugador",
             'data' => $buscarJugador,
+            'incidencias'=>$dataIncidencias,
         );
         return $respuesta;
     }

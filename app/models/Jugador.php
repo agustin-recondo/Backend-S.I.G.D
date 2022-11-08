@@ -9,11 +9,13 @@ class JugadorModel
     }
 
     public function getJugador($ci){
-        $sql = "SELECT jugador.cijugador, jugador.nomjugador, jugador.apjugador, jugador.fechanacjugador, jugador.peso, jugador.altura, jugador.dorsal, ocupa.idposicion, posicion.nomposicion 
+        $sql = "SELECT jugador.cijugador, jugador.nomjugador, jugador.apjugador, jugador.fechanacjugador, jugador.peso, jugador.altura, jugador.dorsal, ocupa.idposicion, posicion.nomposicion, equipo.nomequipo
         FROM jugador 
         INNER JOIN ocupa ON ocupa.cijugador = jugador.cijugador 
-        INNER JOIN posicion ON posicion.idposicion = ocupa.idposicion  
-        WHERE jugador.cijugador = $ci ;";
+        INNER JOIN posicion ON posicion.idposicion = ocupa.idposicion
+        INNER JOIN realiza ON jugador.cijugador = realiza.cijugador
+        INNER JOIN equipo on realiza.idequipo = equipo.idequipo
+        WHERE jugador.cijugador = $ci";
         $resultado = $this->db->query($sql);
         return $resultado->fetch_assoc();
     }

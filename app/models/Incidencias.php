@@ -28,10 +28,30 @@ class IncidenciasModel
 
             array_push($array, $incidencia);
         }
-        
-
         return $array;
     }
+
+    public function getIncidenciasJugador($ci){
+        $sql = "SELECT incidencia.nomincidencia,COUNT(guarda.idincidencia) AS cantIncidencia,registro_incidencia.cijugador FROM registro_incidencia
+        INNER JOIN guarda ON guarda.idregistro = registro_incidencia.idregistro
+        INNER JOIN incidencia ON incidencia.idincidencia = guarda.idincidencia
+        GROUP BY incidencia.nomincidencia
+        HAVING registro_incidencia.cijugador = $ci";
+        $resultado = $this->db->query($sql);
+
+        $array = [];
+
+        while ($fila = $resultado->fetch_assoc()) {
+            $incidencia = array(
+                'nomincidencia' =>$fila['nomincidencia'],
+                'cantincidencia' => $fila['cantIncidencia'],
+            );
+
+            array_push($array, $incidencia);
+        }
+        return $array;
+    }
+        
 
     public function createIncidencia($idDeporte,$idIncidencia, $nombres){
         $values = '';
