@@ -1,6 +1,6 @@
 <?php
 
-use \Firebase\JWT\JWT;
+use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 $router->filter('auth', function(){

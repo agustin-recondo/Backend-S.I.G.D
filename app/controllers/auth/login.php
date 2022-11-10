@@ -52,7 +52,7 @@ class LoginController
 
             //Recipients
             $mail->setFrom('sigd.soporte@gmail.com', 'S.I.G.D');
-            $mail->addAddress('beleme8773@dmtubes.com', $usuario['nomusuario'].' '.$usuario['apusuario']);
+            $mail->addAddress($email, $usuario['nomusuario'].' '.$usuario['apusuario']);
 
             //Content
             $mail->isHTML(true);
