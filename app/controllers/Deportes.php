@@ -1,9 +1,9 @@
 <?php
 $ruta = getcwd();
 
-require_once($ruta . '\app\models\Deportes.php');
-require_once($ruta . '\app\models\Posiciones.php');
-require_once($ruta . '\app\models\Incidencias.php');
+require_once($ruta . '/app/models/Deportes.php');
+require_once($ruta . '/app/models/Posiciones.php');
+require_once($ruta . '/app/models/Incidencias.php');
 require_once($ruta . '/app/helpers/helpers.php');
 
 

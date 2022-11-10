@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\SMTP;
 
 require_once($ruta . '/app/controllers/auth/token.php');
 require_once($ruta . '/app/helpers/helpers.php');
-require_once($ruta . '\app\models\Usuario.php');
+require_once($ruta . '/app/models/Usuario.php');
 class LoginController
 {
 

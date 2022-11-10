@@ -1,7 +1,7 @@
 <?php
 $ruta = getcwd();
 
-require_once($ruta . '\app\models\Usuario.php');
+require_once($ruta . '/app/models/Usuario.php');
 require_once($ruta . '/app/helpers/helpers.php');
 
 
